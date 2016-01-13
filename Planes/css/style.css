@@ -10,14 +10,25 @@ body {
 
 .stage {
     position: absolute;
+    background: url(../img/clouds.fw.png);
     z-index: 1;
 }
 
 #plane{
     position: absolute;
-    background: no-repeat;
+    left: 0;
+    bottom: 0;
+    background: url(../img/v2_101x75.png) no-repeat;
     width: 101px;
     height: 75px;
     margin: 0;
     z-index: 2;
+}
+
+.bullet {
+    background-color: orange;
+    width: 5px;
+    height: 5px;
+    z-index: 5;
+    position: absolute;
 }
