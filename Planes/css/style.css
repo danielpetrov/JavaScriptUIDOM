@@ -16,12 +16,12 @@ body {
 
 #player{
     position: absolute;
-    background: url(../img/v2_101x75.png) no-repeat;
     margin: 0;
     z-index: 2;
 }
 
 .bullet {
+    left: 50px;
     z-index: 5;
     position: absolute;
 }

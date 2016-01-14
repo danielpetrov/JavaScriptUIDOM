@@ -7,10 +7,11 @@ var Game = (function() {
         player,
         GameInit = {
             mainLoop: function() {
-
-                this.planeManager.publish();
+                //this.bulletManager.publish();
+                this.bulletManager.move();
+                this.playerManager.publish();
             },
-            planeManager: null,
+            playerManager: null,
             bulletManager: null,
             addEventListeners: function() {
                 window.onscroll = function() {
@@ -19,10 +20,10 @@ var Game = (function() {
 
                 var _this = this;
                 document.addEventListener('keydown', function(e) {
-                    _this.planeManager.keyboardListener(e);
+                    _this.playerManager.keyboardListener(e);
                 });
                 document.addEventListener('keyup', function(e) {
-                    _this.planeManager.keyboardListener(e);
+                    _this.playerManager.keyboardListener(e);
                 });
             },
             context: {
@@ -40,11 +41,11 @@ var Game = (function() {
 
 
         GameInit.bulletManager = new BulletManager();
-        GameInit.planeManager = new PlaneManager();
+        GameInit.playerManager = new PlayerManager();
 
         player = new Player();
-        GameInit.planeManager.spawn(player);
-
+        GameInit.playerManager.spawn(player);
+        //GameInit.bulletManager.spawn(new Bullet(100, 100, 'orange'));
         GameInit.addEventListeners();
 
         Game.start();

@@ -3,9 +3,6 @@ var WorldObject = (function(){
 
     function WorldObject() {
         this.dom = document.createElement('div');
-        if (this.getCssClass()) {
-            this.dom.className = this.getCssClass();
-        }
     }
 
     WorldObject.prototype.move = function () {

@@ -1,33 +1,29 @@
-var Bullet = (function(parent) {
+var Bullet = (function(orangeBullet, someOtherBullet) {
     'use strict';
 
-    var BULLET_WIDTH = 10,
-        BULLET_HEIGHT = 10,
-        BULLET_BACKGROUNDCOLOR = 'orange';
+    var BLUE_BULLET = 'blue',
+        ORANGE_BULLET = 'orange',
+        bulletType;
 
-    function Bullet(possLeft, possTop) {
-        parent.call(this);
-
-        this.positionLeft = possLeft;
-        this.positionTop = possTop;
-        this.dom.style.width = BULLET_WIDTH + 'px';
-        this.dom.style.height = BULLET_HEIGHT + 'px';
-        this.dom.style.backgroundColor = BULLET_BACKGROUNDCOLOR;
-        this.speed = 1;
+    function Bullet(possLeft, possTop, type) {
+        bulletType = type;
+        switch(type){
+            case ORANGE_BULLET: orangeBullet.call(this, possLeft, possTop);
+                break;
+            case BLUE_BULLET: someOtherBullet.call(this, possLeft, possTop);
+                break;
+        }
 
     }
 
-    Bullet.prototype = Object.create(parent.prototype);
+    switch(bulletType){
+        case ORANGE_BULLET: Bullet.prototype = Object.create(orangeBullet.prototype);
+            break;
+        case BLUE_BULLET: Bullet.prototype =  Object.create(someOtherBullet.prototype);
+            break;
+    }
 
-    Bullet.prototype.getCssClass = function () {
-        return "bullet";
-    };
-
-    Bullet.prototype.move = function () {
-        this.dom.style.left = 250 + 'px';
-        this.dom.style.top = 250 + 'px';
-    };
 
     return Bullet;
 
-})(WorldObject);
+})(BulletOrangeBuilder, BulletOrangeBuilder);

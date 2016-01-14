@@ -1,7 +1,7 @@
-var PlaneManager = (function(parent){
+var PlayerManager = (function(parent){
     'use strict';
 
-    function PlaneManager() {
+    function PlayerManager() {
         this.moveLeft= false;
         this.moveRight= false;
         this.moveForward= false;
@@ -11,17 +11,15 @@ var PlaneManager = (function(parent){
         parent.call(this);
     }
 
-    PlaneManager.prototype = Object.create(parent.prototype);
+    PlayerManager.prototype = Object.create(parent.prototype);
 
-    PlaneManager.prototype.onGameLoop = function(obj) {
+    PlayerManager.prototype.onGameLoop = function(obj) {
         if (!obj.isEnemy) {
             if (this.isShooting) {
                 var bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth /2),
                     bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight /2);
 
-                var bullet = new Bullet(100, 100);
-
-                this.shoot(bullet);
+                this.shoot();
             }
 
             if (this.moveLeft && (obj.positionLeft - obj.speed) > 0) {
@@ -44,12 +42,12 @@ var PlaneManager = (function(parent){
         obj.move();
     };
 
-    PlaneManager.prototype.shoot = function(bullet) {
-        this.bulletManager.spawn(bullet);
+    PlayerManager.prototype.shoot = function() {
+        this.bulletManager.spawn(new Bullet(200, 200, 'orange'));
     };
 
-    PlaneManager.prototype.keyboardListener  =  function(e) {
-        var value = e.type == 'keydown' ? true : false;
+    PlayerManager.prototype.keyboardListener  =  function(e) {
+        var value = e.type == 'keydown';
         switch (e.keyCode) {
             case 37:
                 this.moveLeft = value;
@@ -72,7 +70,7 @@ var PlaneManager = (function(parent){
         }
     };
 
-    return PlaneManager;
+    return PlayerManager;
 
 })(Manager);
 
