@@ -8,17 +8,15 @@ var Plane = (function(parent){
     function Plane() {
         parent.call(this, dom);
 
-        this.dom.id = 'plane';
+        this.dom.style.width = PLANE_WIDTH + 'px';
+        this.dom.style.height = PLANE_HEIGHT + 'px';
+
         this.planeWidth = PLANE_WIDTH;
         this.planeHeight = PLANE_HEIGHT;
-        this.positionLeft = (Game.getContextValue('width')/ 2) - this.planeWidth/2;
-        this.positionTop = Game.getContextValue('height') - this.planeHeight;
-        this.isEnemy = false;
         this.speed = PLANE_SPEED;
     }
 
     Plane.prototype = Object.create(parent.prototype);
-    Plane.prototype.constructor = Plane;
 
     return Plane;
 

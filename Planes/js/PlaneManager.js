@@ -13,14 +13,13 @@ var PlaneManager = (function(parent){
 
     PlaneManager.prototype = Object.create(parent.prototype);
 
-    PlaneManager.prototype.constructor = PlaneManager;
-
     PlaneManager.prototype.onGameLoop = function(obj) {
         if (!obj.isEnemy) {
             if (this.isShooting) {
-                var bullet = new Bullet(possLeft, possRight);
-                bullet.positionLeft = obj.positionLeft + Math.floor(obj.planeWidth /2);
-                bullet.positionTop = obj.positionTop - Math.ceil(obj.planeWidth /2);
+                var bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth /2),
+                    bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight /2);
+
+                var bullet = new Bullet(100, 100);
 
                 this.shoot(bullet);
             }

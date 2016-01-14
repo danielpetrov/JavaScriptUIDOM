@@ -16,7 +16,7 @@ var Manager = (function(){
         document.body.appendChild(newObj.dom);
     };
 
-    Manager.prototype.destroy = function(index) {
+    Manager.prototype.deleteObject = function(index) {
         var el = this.subscribers.splice(index, 1);
         document.body.removeChild(el.dom);
     };

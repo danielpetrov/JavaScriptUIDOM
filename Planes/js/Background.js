@@ -1,6 +1,5 @@
 var Stage = function() {
     'use strict';
-    //I did some here refacturing as well
 
     var stages = [document.querySelector('.stage')],
         stageInterval = null,
@@ -21,14 +20,15 @@ var Stage = function() {
     }
 
     function moveStage() {
+        //fixed a bug here
         for (var i = 0 ; i < stagePositions.length; i++) {
             stagePositions[i]++;
             stages[i].style.top = stagePositions[i] + 'px';
         }
-        if (stagePositions[0] > windowHeight) {
-            var stage = stages.shift();
-            var position = stagePositions.shift();
-            position = (0 - (windowHeight * 2));
+        if (stagePositions[i] > windowHeight) {
+            var stage = stages.shift(),
+                position = (i - (windowHeight * 2));
+
             stage.style.top = position + 'px';
             stagePositions.push(position);
             stages.push(stage);

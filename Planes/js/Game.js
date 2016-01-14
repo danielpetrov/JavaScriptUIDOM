@@ -4,18 +4,18 @@ var Game = (function() {
 
     var stage,
         gameInterval,
+        player,
         GameInit = {
             mainLoop: function() {
+
                 this.planeManager.publish();
             },
             planeManager: null,
+            bulletManager: null,
             addEventListeners: function() {
                 window.onscroll = function() {
                     return false;
                 };
-                window.addEventListener('contextmenu', function(e) {
-                    e.preventDefault();
-                }, false);
 
                 var _this = this;
                 document.addEventListener('keydown', function(e) {
@@ -37,8 +37,14 @@ var Game = (function() {
 
         GameInit.context.width = window.innerWidth;
         GameInit.context.height = window.innerHeight;
+
+
+        GameInit.bulletManager = new BulletManager();
         GameInit.planeManager = new PlaneManager();
-        GameInit.planeManager.spawn(new Plane());
+
+        player = new Player();
+        GameInit.planeManager.spawn(player);
+
         GameInit.addEventListeners();
 
         Game.start();

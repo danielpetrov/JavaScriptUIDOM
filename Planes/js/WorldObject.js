@@ -6,7 +6,6 @@ var WorldObject = (function(){
         if (this.getCssClass()) {
             this.dom.className = this.getCssClass();
         }
-        this.move();
     }
 
     WorldObject.prototype.move = function () {

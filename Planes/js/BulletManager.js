@@ -6,7 +6,10 @@ var BulletManager = (function(parent){
     }
 
     BulletManager.prototype = Object.create(parent.prototype);
-    BulletManager.prototype.constructor = BulletManager;
+
+    BulletManager.prototype.onGameLoop = function(obj) {
+        obj.move();
+    };
 
     return BulletManager;
 
