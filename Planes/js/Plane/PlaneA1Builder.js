@@ -3,7 +3,7 @@ var PlaneA1Builder = (function(parent){
 
     var PLANE_WIDTH = 101,
         PLANE_HEIGHT = 75,
-        PLANE_SPEED = 1;
+        PLANE_SPEED = 3;
 
     function PlaneA1Builder() {
         parent.call(this, dom);

@@ -20,7 +20,8 @@ var Stage = function() {
     }
 
     function moveStage() {
-        //fixed a bug here
+        //fixed a bug here, countless errors
+        //TODO: another bug to fix - stage dissapears after some time
         for (var i = 0 ; i < stagePositions.length; i++) {
             stagePositions[i]++;
             stages[i].style.top = stagePositions[i] + 'px';

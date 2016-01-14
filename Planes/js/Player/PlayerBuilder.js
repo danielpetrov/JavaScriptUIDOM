@@ -5,6 +5,8 @@ var PlayerBuilder = (function(parent){
         AMOUNT_OF_BULLETS = 40,
         AMOUNT_OF_ROCKETS = 7;
 
+    PlayerBuilder.prototype = Object.create(parent.prototype);
+
     function PlayerBuilder() {
         parent.call(this);
 
@@ -16,8 +18,6 @@ var PlayerBuilder = (function(parent){
         this.amountOfBullets = AMOUNT_OF_BULLETS;
         this.amountOfRockets = AMOUNT_OF_ROCKETS;
     }
-
-    PlayerBuilder.prototype = Object.create(parent.prototype);
 
     return PlayerBuilder;
 
