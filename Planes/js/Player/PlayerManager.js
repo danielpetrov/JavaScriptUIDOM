@@ -3,32 +3,36 @@ var PlayerManager = (function(parent){
 
     var bulletPossLeft,
         bulletPossTop,
-        shootInterval = 1000,
-        isShooting = false,
-        gameInterval;
-
-
-    function PlayerManager() {
-        this.moveLeft= false;
-        this.moveRight= false;
-        this.moveForward= false;
-        this.moveBack= false;
-        this.isShooting= false;
-        this.bulletManager = new BulletManager();
-        parent.call(this);
-    }
+        FIRE_SPEED = 1000,
+        hasShot = false;
 
     PlayerManager.prototype = Object.create(parent.prototype);
+
+    function PlayerManager() {
+         parent.call(this);
+
+         this.moveLeft= false;
+         this.moveRight= false;
+         this.moveForward= false;
+         this.moveBack= false;
+         this.isShooting= false;
+         this.bulletManager = new BulletManager();
+    }
 
     PlayerManager.prototype.onGameLoop = function(obj) {
         if (this.isShooting) {
             bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth /2);
             bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight /2);
-            this.shoot();
-        } else if(gameInterval){
-           // debugger;
-            clearInterval(gameInterval);
+
+            if(!hasShot){
+                this.shoot();
+                hasShot = true;
+                setTimeout(function(){
+                    hasShot = false;
+                }, FIRE_SPEED);
+            }
         }
+
         if (this.moveLeft && (obj.positionLeft - obj.speed) > 0) {
             obj.positionLeft -= obj.speed;
         }
@@ -45,18 +49,14 @@ var PlayerManager = (function(parent){
         obj.move();
     };
 
-    PlayerManager.prototype.shoot = function() {
-        if(!isShooting){
-        var playerManager = this;
-
-            gameInterval = setInterval(function(){
-                playerManager.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, 'orange'));
-            }, shootInterval);
-        }
+    PlayerManager.prototype.shoot = function(){
+        this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, 'orange'));
     };
 
     PlayerManager.prototype.keyboardListener  =  function(e) {
+
         var value = e.type == 'keydown';
+
         switch (e.keyCode) {
             case 37:
                 this.moveLeft = value;

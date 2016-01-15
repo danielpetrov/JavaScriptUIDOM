@@ -5,6 +5,8 @@ var PlaneA1Builder = (function(parent){
         PLANE_HEIGHT = 75,
         PLANE_SPEED = 3;
 
+    PlaneA1Builder.prototype = Object.create(parent.prototype);
+
     function PlaneA1Builder() {
         parent.call(this, dom);
 
@@ -16,8 +18,6 @@ var PlaneA1Builder = (function(parent){
         this.planeHeight = PLANE_HEIGHT;
         this.speed = PLANE_SPEED;
     }
-
-    PlaneA1Builder.prototype = Object.create(parent.prototype);
 
     return PlaneA1Builder;
 

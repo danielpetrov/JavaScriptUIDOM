@@ -4,7 +4,8 @@ var Game = (function() {
 
     var stage,
         gameInterval,
-        player;
+        player,
+        GAME_SPEED = 10;
 
     function init() {
         gameInitialLoad.addEventListeners();
@@ -25,7 +26,7 @@ var Game = (function() {
         gameInterval = setInterval(function(){
             gameInitialLoad.mainLoop();
             stage.moveStage();
-        }, 10);
+        }, GAME_SPEED);
     }
 
     function pause() {

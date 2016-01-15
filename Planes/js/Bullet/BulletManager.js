@@ -8,7 +8,6 @@ var BulletManager = (function(parent){
     }
 
     BulletManager.prototype.onGameLoop = function(obj) {
-
         obj.move();
     };
 
