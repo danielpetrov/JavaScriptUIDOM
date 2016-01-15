@@ -2,7 +2,11 @@ var PlayerManager = (function(parent){
     'use strict';
 
     var bulletPossLeft,
-        bulletPossTop;
+        bulletPossTop,
+        shootInterval = 1000,
+        isShooting = false,
+        gameInterval;
+
 
     function PlayerManager() {
         this.moveLeft= false;
@@ -20,8 +24,10 @@ var PlayerManager = (function(parent){
         if (this.isShooting) {
             bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth /2);
             bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight /2);
-
-            this.shoot(bulletPossLeft, bulletPossTop);
+            this.shoot();
+        } else if(gameInterval){
+           // debugger;
+            clearInterval(gameInterval);
         }
         if (this.moveLeft && (obj.positionLeft - obj.speed) > 0) {
             obj.positionLeft -= obj.speed;
@@ -39,8 +45,14 @@ var PlayerManager = (function(parent){
         obj.move();
     };
 
-    PlayerManager.prototype.shoot = function(bulletPossLeft, bulletPossTop) {
-        this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, 'orange'));
+    PlayerManager.prototype.shoot = function() {
+        if(!isShooting){
+        var playerManager = this;
+
+            gameInterval = setInterval(function(){
+                playerManager.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, 'orange'));
+            }, shootInterval);
+        }
     };
 
     PlayerManager.prototype.keyboardListener  =  function(e) {
@@ -61,7 +73,6 @@ var PlayerManager = (function(parent){
             case 32:
                 this.isShooting = value;
                 break;
-
             default:
                 break;
         }

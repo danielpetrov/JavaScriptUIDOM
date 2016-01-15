@@ -16,9 +16,11 @@ var Manager = (function(){
         document.body.appendChild(newObj.dom);
     };
 
-    Manager.prototype.deleteObject = function(index) {
-        var el = this.subscribers.splice(index, 1);
-        document.body.removeChild(el.dom);
+    Manager.prototype.deleteObject = function(obj) {
+        //debugger;
+        //var el = this.subscribers.splice(index, 1);
+        this.subscribers = [];
+       // document.body.removeChild(obj.dom);
     };
 
     Manager.prototype.onGameLoop = function(obj) {

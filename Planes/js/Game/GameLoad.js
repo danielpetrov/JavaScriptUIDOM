@@ -7,11 +7,11 @@ var gameInitialLoad = (function(){
     }
 
     function addEventListeners() {
+        var _this = this;
+
         window.onscroll = function() {
             return false;
         };
-
-        var _this = this;
         document.addEventListener('keydown', function(e) {
             _this.playerManager.keyboardListener(e);
         });
