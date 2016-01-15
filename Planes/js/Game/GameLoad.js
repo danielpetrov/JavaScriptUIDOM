@@ -23,8 +23,6 @@ var gameInitialLoad = (function(){
     return {
         mainLoop : mainLoop,
         addEventListeners: addEventListeners,
-        playerManager: null,
-        bulletManager: null,
         context: {
             width: null,
             height: null

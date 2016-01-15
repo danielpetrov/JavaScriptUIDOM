@@ -3,7 +3,7 @@ var PlayerManager = (function(parent){
 
     var bulletPossLeft,
         bulletPossTop,
-        FIRE_SPEED = 1000,
+        FIRE_SPEED = 500,
         hasShot = false;
 
     PlayerManager.prototype = Object.create(parent.prototype);
