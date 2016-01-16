@@ -4,9 +4,10 @@ var PlayerManager = (function(parent){
     var bulletPossLeft,
         bulletPossTop,
         FIRE_SPEED = 4,
-        ONE_SECOND_TIMEOUT = 1000,
         BULLET_TYPE_ORANGE = 'orange',
         BULLET_TYPE_BLUE = 'blue',
+        bulletType = BULLET_TYPE_BLUE,
+        ONE_SECOND_TIMEOUT = 1000,
         hasShot = false;
 
     PlayerManager.prototype = Object.create(parent.prototype);
@@ -53,7 +54,7 @@ var PlayerManager = (function(parent){
     };
 
     PlayerManager.prototype.shoot = function(){
-        this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, BULLET_TYPE_BLUE));
+        this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, bulletType));
     };
 
     PlayerManager.prototype.keyboardListener  =  function(e) {
