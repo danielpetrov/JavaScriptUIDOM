@@ -1,14 +1,40 @@
-var Bullet = (function(orangeBullet, someOtherBullet) {
+var Bullet = (function(orangeBullet, blueBullet) {
     'use strict';
 
     var BLUE_BULLET = 'blue',
         ORANGE_BULLET = 'orange',
-        bulletType;
+        self = {};
 
-    Bullet.prototype = Object.create(orangeBullet.prototype);
+    switch(self.bulletType){
+        case ORANGE_BULLET:
+            Bullet.prototype = Object.create(orangeBullet.prototype);
+            break;
+        case BLUE_BULLET:
+            Bullet.prototype = Object.create(blueBullet.prototype);
+            break;
+        default:
+            Bullet.prototype = Object.create(orangeBullet.prototype);
+            break;
+    }
 
     function Bullet(possLeft, possTop, type) {
-        orangeBullet.call(this, possLeft, possTop);
+        self.bulletType = type;
+
+        switch(self.bulletType){
+            case ORANGE_BULLET:
+                orangeBullet.call(this, possLeft, possTop);
+                self.parent = orangeBullet;
+                break;
+            case BLUE_BULLET:
+                blueBullet.call(this, possLeft, possTop);
+                self.parent = blueBullet;
+                break;
+            default:
+                orangeBullet.call(this, possLeft, possTop);
+                self.parent = orangeBullet;
+                break;
+        }
+
     }
 
     Bullet.prototype.move = function () {
@@ -21,4 +47,4 @@ var Bullet = (function(orangeBullet, someOtherBullet) {
     };
 
     return Bullet;
-})(BulletOrangeBuilder);
+})(BulletOrangeBuilder, BulletBlueBuilder);
