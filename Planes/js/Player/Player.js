@@ -3,12 +3,13 @@ var Player = (function (parent) {
     var ORANGE_BULET_TYPE = 'orange',
         BLUE_BULLET_TYPE = 'blue';
 
+    Player.prototype = Object.create(parent.prototype);
+
     function Player() {
+
         parent.call(this);
 
     }
-
-    Player.prototype = Object.create(parent.prototype);
 
     Player.prototype.addBullets = addBullets;
 

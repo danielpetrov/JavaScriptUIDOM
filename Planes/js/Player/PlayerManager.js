@@ -24,13 +24,13 @@ var PlayerManager = (function (parent) {
         this.bulletType = BULLET_TYPE_ORANGE;
     }
 
-    PlayerManager.prototype.onGameLoop = function (obj) {
+    PlayerManager.prototype.onGameLoop = function (player) {
         if (this.isShooting) {
-            if(this.bulletType ==  BULLET_TYPE_ORANGE && obj.amountOfBullets.orangeBullets > 0 ||
-                this.bulletType ==  BULLET_TYPE_BLUE && obj.amountOfBullets.blueBullets > 0){
+            if(this.bulletType ==  BULLET_TYPE_ORANGE && player.amountOfBullets.orangeBullets > 0 ||
+                this.bulletType ==  BULLET_TYPE_BLUE && player.amountOfBullets.blueBullets > 0){
 
-                bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth / 2);
-                bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight / 2);
+                bulletPossLeft = player.positionLeft + Math.floor(player.planeWidth / 2);
+                bulletPossTop = player.positionTop - Math.ceil(player.planeHeight / 2);
 
                 if (!hasShot) {
                     this.shoot();
@@ -42,20 +42,20 @@ var PlayerManager = (function (parent) {
             }
         }
 
-        if (this.moveLeft && (obj.positionLeft - obj.speed) > 0) {
-            obj.positionLeft -= obj.speed;
+        if (this.moveLeft && (player.positionLeft - player.speed) > 0) {
+            player.positionLeft -= player.speed;
         }
-        if (this.moveRight && (obj.positionLeft + obj.speed) < Game.getContextValue('width')) {
-            obj.positionLeft += obj.speed;
+        if (this.moveRight && (player.positionLeft + player.speed) < Game.getContextValue('width')) {
+            player.positionLeft += player.speed;
         }
-        if (this.moveForward && (obj.positionTop - obj.speed) > 0) {
-            obj.positionTop -= obj.speed;
+        if (this.moveForward && (player.positionTop - player.speed) > 0) {
+            player.positionTop -= player.speed;
         }
-        if (this.moveBack && (obj.positionTop + obj.speed) < Game.getContextValue('height')) {
-            obj.positionTop += obj.speed;
+        if (this.moveBack && (player.positionTop + player.speed) < Game.getContextValue('height')) {
+            player.positionTop += player.speed;
         }
 
-        obj.move();
+        player.move();
     };
 
     PlayerManager.prototype.shoot = function () {

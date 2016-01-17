@@ -7,8 +7,8 @@ var InfoBoxManager = (function (parent) {
         parent.call(this);
     }
 
-    InfoBoxManager.prototype.onGameLoop = function (obj) {
-        obj.changeInnerContent();
+    InfoBoxManager.prototype.onGameLoop = function (infoBox) {
+        infoBox.changeInnerContent();
     };
 
     return InfoBoxManager;
