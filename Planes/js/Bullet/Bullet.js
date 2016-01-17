@@ -1,11 +1,11 @@
-var Bullet = (function(orangeBullet, blueBullet) {
+var Bullet = (function (orangeBullet, blueBullet) {
     'use strict';
 
     var BLUE_BULLET = 'blue',
         ORANGE_BULLET = 'orange',
         self = {};
 
-    switch(self.bulletType){
+    switch (self.bulletType) {
         case ORANGE_BULLET:
             Bullet.prototype = Object.create(orangeBullet.prototype);
             break;
@@ -20,18 +20,15 @@ var Bullet = (function(orangeBullet, blueBullet) {
     function Bullet(possLeft, possTop, type) {
         self.bulletType = type;
 
-        switch(self.bulletType){
+        switch (self.bulletType) {
             case ORANGE_BULLET:
                 orangeBullet.call(this, possLeft, possTop);
-                self.parent = orangeBullet;
                 break;
             case BLUE_BULLET:
                 blueBullet.call(this, possLeft, possTop);
-                self.parent = blueBullet;
                 break;
             default:
                 orangeBullet.call(this, possLeft, possTop);
-                self.parent = orangeBullet;
                 break;
         }
 

@@ -1,3 +1,3 @@
-window.onload = function() {
-	Game.StartGame();
+window.onload = function () {
+    Game.StartGame();
 };

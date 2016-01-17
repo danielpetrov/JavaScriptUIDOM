@@ -1,5 +1,7 @@
-var Player = (function(parent){
+var Player = (function (parent) {
     'use strict';
+    var ORANGE_BULET_TYPE = 'orange',
+        BLUE_BULLET_TYPE = 'blue';
 
     function Player() {
         parent.call(this);
@@ -14,15 +16,27 @@ var Player = (function(parent){
 
     Player.prototype.addHealth = addHealth;
 
-    function addBullets(amount){
-        this.amountOfBullets += amount;
+    function addBullets(amount, bulletType) {
+
+        switch(bulletType){
+            case ORANGE_BULET_TYPE:
+                if(!(this.amountOfBullets.orangeBullets == 0 && amount < 0)){
+                    this.amountOfBullets.orangeBullets += amount;
+                }
+                break;
+            case BLUE_BULLET_TYPE:
+                if(!(this.amountOfBullets.blueBullets == 0 && amount < 0)){
+                    this.amountOfBullets.blueBullets += amount;
+                }
+                break;
+        }
     }
 
-    function addRockets(amount){
-        this.amountOfBullets += amount;
+    function addRockets(amount) {
+        this.amountOfRockets += amount;
     }
 
-    function addHealth(amount){
+    function addHealth(amount) {
         this.health += amount;
     }
 

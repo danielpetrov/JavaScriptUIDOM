@@ -1,4 +1,4 @@
-var PlaneA1Builder = (function(parent){
+var PlaneA1Builder = (function (parent) {
     'use strict';
 
     var PLANE_WIDTH = 101,

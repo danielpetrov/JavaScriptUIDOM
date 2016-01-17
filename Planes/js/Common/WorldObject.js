@@ -1,4 +1,4 @@
-var WorldObject = (function(){
+var WorldObject = (function () {
     'use strict';
 
     function WorldObject() {
@@ -17,9 +17,8 @@ var WorldObject = (function(){
         return '';
     };
 
-
-    WorldObject.prototype.getCssClass = function () {
-        return '';
+    WorldObject.prototype.onGameLoop = function (obj) {
+        return 'NOT IMPLEMENTED';
     };
 
     return WorldObject;

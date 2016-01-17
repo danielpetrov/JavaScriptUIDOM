@@ -1,10 +1,11 @@
-var Game = (function() {
+var Game = (function () {
     'use strict';
     //I did some refacturing and switched to reavealing module pattern instead
 
     var stage,
         gameInterval,
         player,
+        infoBox,
         GAME_SPEED = 10;
 
     function init() {
@@ -19,12 +20,16 @@ var Game = (function() {
         player = new Player();
         gameInitialLoad.playerManager.spawn(player);
 
+        gameInitialLoad.infoBoxManager = new InfoBoxManager();
+        infoBox = new InfoBox(player);
+        gameInitialLoad.infoBoxManager.spawn(infoBox);
+
         Game.start();
     }
 
     function start() {
-        gameInterval = setInterval(function(){
-            gameInitialLoad.mainLoop();
+        gameInterval = setInterval(function () {
+            gameInitialLoad.mainLoop(player, infoBox);
             stage.moveStage();
         }, GAME_SPEED);
     }

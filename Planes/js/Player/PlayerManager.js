@@ -1,4 +1,4 @@
-var PlayerManager = (function(parent){
+var PlayerManager = (function (parent) {
     'use strict';
 
     var bulletPossLeft,
@@ -6,34 +6,39 @@ var PlayerManager = (function(parent){
         FIRE_SPEED = 4,
         BULLET_TYPE_ORANGE = 'orange',
         BULLET_TYPE_BLUE = 'blue',
-        bulletType = BULLET_TYPE_BLUE,
         ONE_SECOND_TIMEOUT = 1000,
         hasShot = false;
 
     PlayerManager.prototype = Object.create(parent.prototype);
 
     function PlayerManager() {
-         parent.call(this);
+        parent.call(this);
 
-         this.moveLeft= false;
-         this.moveRight= false;
-         this.moveForward= false;
-         this.moveBack= false;
-         this.isShooting= false;
-         this.bulletManager = new BulletManager();
+        this.moveLeft = false;
+        this.moveRight = false;
+        this.moveForward = false;
+        this.moveBack = false;
+        this.isShooting = false;
+        this.bulletManager = new BulletManager();
+        this.fireSpeed = FIRE_SPEED;
+        this.bulletType = BULLET_TYPE_ORANGE;
     }
 
-    PlayerManager.prototype.onGameLoop = function(obj) {
+    PlayerManager.prototype.onGameLoop = function (obj) {
         if (this.isShooting) {
-            bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth /2);
-            bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight /2);
+            if(this.bulletType ==  BULLET_TYPE_ORANGE && obj.amountOfBullets.orangeBullets > 0 ||
+                this.bulletType ==  BULLET_TYPE_BLUE && obj.amountOfBullets.blueBullets > 0){
 
-            if(!hasShot){
-                this.shoot();
-                hasShot = true;
-                setTimeout(function(){
-                    hasShot = false;
-                }, ONE_SECOND_TIMEOUT/FIRE_SPEED);
+                bulletPossLeft = obj.positionLeft + Math.floor(obj.planeWidth / 2);
+                bulletPossTop = obj.positionTop - Math.ceil(obj.planeHeight / 2);
+
+                if (!hasShot) {
+                    this.shoot();
+                    hasShot = true;
+                    setTimeout(function () {
+                        hasShot = false;
+                    }, ONE_SECOND_TIMEOUT / this.fireSpeed);
+                }
             }
         }
 
@@ -53,11 +58,11 @@ var PlayerManager = (function(parent){
         obj.move();
     };
 
-    PlayerManager.prototype.shoot = function(){
-        this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, bulletType));
+    PlayerManager.prototype.shoot = function () {
+        this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, this.bulletType));
     };
 
-    PlayerManager.prototype.keyboardListener  =  function(e) {
+    PlayerManager.prototype.keyboardListener = function (e) {
 
         var value = e.type == 'keydown';
 
@@ -76,6 +81,12 @@ var PlayerManager = (function(parent){
                 break;
             case 32:
                 this.isShooting = value;
+                break;
+            case 49:
+                this.bulletType = BULLET_TYPE_ORANGE;
+                break;
+            case 50:
+                this.bulletType = BULLET_TYPE_BLUE;
                 break;
             default:
                 break;

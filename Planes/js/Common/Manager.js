@@ -1,29 +1,28 @@
-var Manager = (function(){
+var Manager = (function () {
     'use strict';
 
     function Manager() {
         this.subscribers = [];
     }
 
-    Manager.prototype.publish= function() {
+    Manager.prototype.publish = function () {
         for (var i = 0; i < this.subscribers.length; i++) {
             this.onGameLoop(this.subscribers[i]);
         }
     };
 
-    Manager.prototype.spawn = function(newObj) {
+    Manager.prototype.spawn = function (newObj) {
         this.subscribers.push(newObj);
         document.body.appendChild(newObj.dom);
     };
 
-    Manager.prototype.deleteObject = function(obj) {
+    Manager.prototype.deleteObject = function (obj) {
         //debugger;
         //var el = this.subscribers.splice(index, 1);
-        this.subscribers = [];
-       // document.body.removeChild(obj.dom);
+        // document.body.removeChild(obj.dom);
     };
 
-    Manager.prototype.onGameLoop = function(obj) {
+    Manager.prototype.onGameLoop = function (obj) {
         throw new Error("Not implemented");
     };
 

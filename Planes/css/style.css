@@ -21,7 +21,11 @@ body {
 }
 
 .bullet {
-    left: 50px;
     z-index: 5;
     position: absolute;
+}
+
+.infoBox {
+    z-index: 7;
+    position: fixed;
 }
