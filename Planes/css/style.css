@@ -4,13 +4,13 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: #78A3D6;
+    background: black;
     overflow: hidden;
+
 }
 
 .stage {
     position: absolute;
-    background: url(../img/clouds.fw.png);
     z-index: 1;
 }
 

@@ -6,7 +6,6 @@ var Player = (function (parent) {
     Player.prototype = Object.create(parent.prototype);
 
     function Player() {
-
         parent.call(this);
 
     }

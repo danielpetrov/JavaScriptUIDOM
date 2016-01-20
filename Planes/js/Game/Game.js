@@ -30,7 +30,7 @@ var Game = (function () {
     function start() {
         gameInterval = setInterval(function () {
             gameInitialLoad.mainLoop(player, infoBox);
-            //stage.moveStage();
+            stage.moveStage();
         }, GAME_SPEED);
     }
 
