@@ -1,23 +1,27 @@
 var InfoBox = (function (parent) {
     'use strict';
 
-    var INFO_BOX_WIDTH = 200,
-        INFO_BOX_HEIGHT = 150;
+    var INFO_BOX_WIDTH = 120,
+        INFO_BOX_HEIGHT = 60,
+        blue = document.getElementById('blue');
 
     InfoBox.prototype = Object.create(parent.prototype);
 
     function InfoBox(player) {
         parent.call(this, dom);
 
-        this.positionLeft = 10;
-        this.positionTop = 10;
         this.dom.style.width = INFO_BOX_WIDTH + 'px';
         this.dom.style.height = INFO_BOX_HEIGHT + 'px';
-        this.dom.style.backgroundColor = 'green';
-        this.dom.style.left = this.positionLeft + 'px';
-        this.dom.style.top = this.positionTop + 'px';
+        this.dom.style.left = 10 + 'px';
+        this.dom.style.top = 10 + 'px';
         this.dom.innerHTML = "";
         this.playerBulletsAmount = player.amountOfBullets;
+        this.playerHealth = player.health;
+
+        this.blue = document.getElementById('blue');
+        this.dom.appendChild(this.blue);
+        this.orange = document.getElementById('orange');
+        this.dom.appendChild(this.orange);
     }
 
     InfoBox.prototype.getCssClass = function () {
@@ -29,8 +33,9 @@ var InfoBox = (function (parent) {
     };
 
     InfoBox.prototype.changeInnerContent = function () {
-        this.dom.innerHTML = '1 ---- >' + 'ORANGE: ' + this.playerBulletsAmount.orangeBullets + "<br />";
-        this.dom.innerHTML += '2 ---- >' + 'BLUE: ' + this.playerBulletsAmount.blueBullets;
+
+        this.blue.innerHTML = this.playerBulletsAmount.blueBullets;
+        this.orange.innerHTML = this.playerBulletsAmount.orangeBullets;
     };
 
     return InfoBox;
