@@ -10,6 +10,7 @@ var InfoBox = (function (parent) {
     function InfoBox(player) {
         parent.call(this, dom);
 
+        this.positionTop = 10;
         this.dom.style.width = INFO_BOX_WIDTH + 'px';
         this.dom.style.height = INFO_BOX_HEIGHT + 'px';
         this.dom.style.left = 10 + 'px';

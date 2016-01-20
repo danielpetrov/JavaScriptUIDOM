@@ -5,8 +5,9 @@ var gameInitialLoad = (function () {
 
     function mainLoop(player, infoBox) {
         gameInitialLoad.playerManager.publish();
-        gameInitialLoad.playerManager.bulletManager.publish();
+
         gameInitialLoad.infoBoxManager.publish();
+        gameInitialLoad.playerManager.bulletManager.publish(infoBox);
 
         if(gameInitialLoad.playerManager.isShooting){
             if (!hasShot) {
