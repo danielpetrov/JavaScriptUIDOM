@@ -29,8 +29,9 @@ var PlayerManager = (function (parent) {
             if(this.bulletType ==  BULLET_TYPE_ORANGE && player.amountOfBullets.orangeBullets > 0 ||
                 this.bulletType ==  BULLET_TYPE_BLUE && player.amountOfBullets.blueBullets > 0){
 
-                bulletPossLeft = player.positionLeft + Math.floor(player.planeWidth / 2);
-                bulletPossTop = player.positionTop - Math.ceil(player.planeHeight / 2);
+                //width and height are reversed becouse it is rotated 90 degrees
+                bulletPossLeft = player.positionLeft + player.planeHeight;
+                bulletPossTop = player.positionTop + player.planeWidth / 2;
 
                 if (!hasShot) {
                     this.shoot();

@@ -5,8 +5,9 @@ var BulletBlueBuilder = (function (parent) {
 
     var BULLET_WIDTH = 20,
         BULLET_HEIGHT = 20,
-        BULLET_SPEED = 7,
-        BULLET_DAMAGE = 15;
+        BULLET_SPEED = 11,
+        BULLET_DAMAGE = 15,
+        BULLET_IMAGE = "url('img/blueBulletSmall.png') no-repeat";
 
     function BulletOrangeBuilder(possLeft, possTop) {
         parent.call(this);
@@ -16,7 +17,7 @@ var BulletBlueBuilder = (function (parent) {
         this.speed = BULLET_SPEED;
         this.dom.style.width = BULLET_WIDTH + 'px';
         this.dom.style.height = BULLET_HEIGHT + 'px';
-        this.dom.style.background = "url('img/blueBulletSmall.png') no-repeat";
+        this.dom.style.background = BULLET_IMAGE;
         this.bulletDamage = BULLET_DAMAGE;
     }
 

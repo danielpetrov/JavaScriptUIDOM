@@ -36,7 +36,7 @@ var Bullet = (function (orangeBullet, blueBullet) {
 
     Bullet.prototype.move = function () {
         orangeBullet.prototype.move.call(this);
-        this.positionTop -= this.speed;
+        this.positionLeft += this.speed;
     };
 
     Bullet.prototype.getCssClass = function () {

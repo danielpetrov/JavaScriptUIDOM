@@ -3,7 +3,8 @@ var PlaneA1Builder = (function (parent) {
 
     var PLANE_WIDTH = 78,
         PLANE_HEIGHT = 100,
-        PLANE_SPEED = 3;
+        PLANE_SPEED = 3,
+        PLANE_IMAGE = "url('img/player.png') no-repeat";
 
     PlaneA1Builder.prototype = Object.create(parent.prototype);
 
@@ -12,8 +13,8 @@ var PlaneA1Builder = (function (parent) {
 
         this.dom.style.width = PLANE_WIDTH + 'px';
         this.dom.style.height = PLANE_HEIGHT + 'px';
+        this.dom.style.background = PLANE_IMAGE;
 
-        this.dom.style.background = "url('img/player.png') no-repeat";
         this.planeWidth = PLANE_WIDTH;
         this.planeHeight = PLANE_HEIGHT;
         this.speed = PLANE_SPEED;
