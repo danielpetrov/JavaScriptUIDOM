@@ -1,12 +1,15 @@
-var Stage = function() {
+var Background = function() {
     'use strict';
 
     var stage = document.querySelector('.stage'),
         windowHeight = window.innerHeight,
-        windowWidth = window.innerWidth;
+        windowWidth = window.innerWidth,
+        BACKGROUND_IMAGE = "url('img/space.jpeg')",
+        STAGE_MOVING_LEFT_SPEED = 0.35,
+        STAGE_MOVING_UP_SPEED = 0.31;
 
     function initStageElements() {
-        stage.style.background = "url('img/space.jpeg')";
+        stage.style.background = BACKGROUND_IMAGE;
         stage.style.width = windowWidth + 'px';
         stage.style.height = windowHeight + "px";
         stage.style.bottom = 0 + "px";
@@ -14,8 +17,8 @@ var Stage = function() {
     }
 
     function moveStage() {
-        windowHeight += 0.35;
-        windowWidth += 0.31;
+        windowHeight += STAGE_MOVING_UP_SPEED;
+        windowWidth += STAGE_MOVING_LEFT_SPEED;
         if(windowHeight > 10000){
             windowHeight = window.innerHeight;
             windowWidth = window.innerWidth;
@@ -26,7 +29,7 @@ var Stage = function() {
 
     return {
         init: initStageElements,
-        moveStage: moveStage
+        move: moveStage
     };
 
 };

@@ -6,14 +6,15 @@ var Game = (function () {
         gameInterval,
         player,
         infoBox,
-        GAME_SPEED = 10;
+        GAME_SPEED = 10,
+        enemyInterval;
 
     function init() {
         gameInitialLoad.addEventListeners();
         gameInitialLoad.context.width = window.innerWidth;
         gameInitialLoad.context.height = window.innerHeight;
 
-        stage = new Stage();
+        stage = new Background();
         stage.init();
 
         gameInitialLoad.playerManager = new PlayerManager();
@@ -24,18 +25,25 @@ var Game = (function () {
         infoBox = new InfoBox(player);
         gameInitialLoad.infoBoxManager.spawn(infoBox);
 
+        gameInitialLoad.enemyManager = new EnemyManager();
+
+        enemyInterval = setInterval(function(){
+            gameInitialLoad.enemyManager.spawn(new EnemyBuilder());
+        }, 3000);
+
         Game.start();
     }
 
     function start() {
         gameInterval = setInterval(function () {
             gameInitialLoad.mainLoop(player, infoBox);
-            stage.moveStage();
+            stage.move();
         }, GAME_SPEED);
     }
 
     function pause() {
         clearInterval(gameInterval);
+        clearInterval(enemyInterval);
     }
 
     function getContextValue(key) {

@@ -6,7 +6,7 @@ var BulletBlueBuilder = (function (parent) {
     var BULLET_WIDTH = 20,
         BULLET_HEIGHT = 20,
         BULLET_SPEED = 11,
-        BULLET_DAMAGE = 15,
+        BULLET_DAMAGE = 30,
         BULLET_IMAGE = "url('img/blueBulletSmall.png') no-repeat";
 
     function BulletOrangeBuilder(possLeft, possTop) {

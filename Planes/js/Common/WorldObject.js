@@ -17,9 +17,5 @@ var WorldObject = (function () {
         return '';
     };
 
-    WorldObject.prototype.onGameLoop = function (obj) {
-        return 'NOT IMPLEMENTED';
-    };
-
     return WorldObject;
 })();

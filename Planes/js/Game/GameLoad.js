@@ -7,7 +7,8 @@ var gameInitialLoad = (function () {
         gameInitialLoad.playerManager.publish();
 
         gameInitialLoad.infoBoxManager.publish();
-        gameInitialLoad.playerManager.bulletManager.publish(infoBox);
+
+        gameInitialLoad.playerManager.bulletManager.publish(gameInitialLoad.enemyManager.subscribers);
 
         if(gameInitialLoad.playerManager.isShooting){
             if (!hasShot) {
@@ -19,6 +20,8 @@ var gameInitialLoad = (function () {
                 }, ONE_SECOND_TIMEOUT / gameInitialLoad.playerManager.fireSpeed);
             }
         }
+
+        gameInitialLoad.enemyManager.publish(gameInitialLoad.playerManager.bulletManager);
     }
 
     function addEventListeners() {
