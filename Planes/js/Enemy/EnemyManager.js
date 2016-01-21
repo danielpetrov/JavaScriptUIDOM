@@ -11,15 +11,20 @@ var EnemyManager = (function (parent) {
         enemy.move();
     };
 
-    EnemyManager.prototype.publish = function (bullets) {
+    EnemyManager.prototype.publish = function (bullets, player) {
         for (var i = 0; i < this.subscribers.length; i++) {
             this.onGameLoop(this.subscribers[i]);
 
             if(this.subscribers[i].positionLeft < -130){
-                //document.body.removeChild(this.subscribers[i].dom);
-                //this.subscribers.splice(i, 1);
-                Game.pause();
-                alert("GAME OVER!!!");
+
+                player.addHealth(-this.subscribers[i].damageToBase);
+                if(player.health <= 0){
+                    Game.pause();
+                    alert("GAME OVER!!!");
+                }
+                document.body.removeChild(this.subscribers[i].dom);
+                this.subscribers.splice(i, 1);
+                break;
             }
 
             for(var bullet in bullets.subscribers){

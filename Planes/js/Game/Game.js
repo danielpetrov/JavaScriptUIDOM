@@ -46,7 +46,7 @@ var Game = (function () {
 
     function start() {
         gameInterval = setInterval(function () {
-            gameInitialLoad.mainLoop(player, infoBox);
+            gameInitialLoad.mainLoop(infoBox, player);
             stage.move();
         }, GAME_SPEED);
     }

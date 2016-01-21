@@ -35,6 +35,11 @@ var InfoBox = (function (parent) {
         this.score.style.top = 30 + "px";
         this.score.style.left = 75 + "px";
         this.dom.appendChild(this.score);
+
+        this.health = document.getElementById('health');
+        this.health.style.top = 5 + "px";
+        this.health.style.left = 75 + "px";
+        this.dom.appendChild(this.health);
     }
 
     InfoBox.prototype.getCssClass = function () {
@@ -43,12 +48,14 @@ var InfoBox = (function (parent) {
 
     InfoBox.prototype.changeInfo = function (player) {
         this.playerBulletsAmount = player.amountOfBullets;
+        this.playerHealth = player.health;
     };
 
     InfoBox.prototype.changeInnerContent = function () {
         this.blue.innerHTML = this.playerBulletsAmount.blueBullets;
         this.orange.innerHTML = this.playerBulletsAmount.orangeBullets;
-        this.score.innerHTML = "SCORE:" + SCORE_POINTS.SCORE_POINTS;
+        this.score.innerHTML = "SCORE: " + SCORE_POINTS.SCORE_POINTS;
+        this.health.innerHTML = this.playerHealth;
     };
 
     return InfoBox;

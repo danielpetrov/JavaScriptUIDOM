@@ -8,7 +8,8 @@ var EnemyLevel1Builder = (function (parent) {
         PLANE_IMAGE = "url('img/enemyLevel1.png') no-repeat",
         ENEMY_STARTING_POSITION_LEFT = 1300,
         ENEMY_STARTING_POSITION_TOP = 250,
-        SCORE_POINTS = 25;
+        SCORE_POINTS = 25,
+        DAMAGE_TO_BASE = 35;
 
 
     EnemyLevel1Builder.prototype = Object.create(parent.prototype);
@@ -33,6 +34,7 @@ var EnemyLevel1Builder = (function (parent) {
         this.speed = PLANE_SPEED;
         this.health = ENEMY_HEALTH;
         this.scorePoints = SCORE_POINTS;
+        this.damageToBase = DAMAGE_TO_BASE;
     }
 
     EnemyLevel1Builder.prototype.move = function () {
