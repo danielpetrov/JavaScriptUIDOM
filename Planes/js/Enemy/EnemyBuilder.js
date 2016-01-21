@@ -8,11 +8,13 @@ var EnemyBuilder = (function (parent) {
 
     EnemyBuilder.prototype = Object.create(parent.prototype);
 
-    function EnemyBuilder() {
+    function EnemyBuilder(positionTop) {
         parent.call(this);
 
+        positionTop = positionTop || ENEMY_STARTING_POSITION_TOP;
+
         this.positionLeft = ENEMY_STARTING_POSITION_LEFT;
-        this.positionTop = ENEMY_STARTING_POSITION_TOP;
+        this.positionTop = positionTop;
 
         this.dom.style.left = ENEMY_STARTING_POSITION_LEFT + 'px';
         this.dom.style.top = ENEMY_STARTING_POSITION_TOP + 'px';

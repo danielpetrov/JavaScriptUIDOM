@@ -2,8 +2,8 @@ var PlayerBuilder = (function (parent) {
     'use strict';
 
     var PLAYER_HEALTH = 100,
-        AMOUNT_OF_ORANGE_BULLETS = 40,
-        AMOUNT_OF_BLUE_BULLETS = 20,
+        AMOUNT_OF_ORANGE_BULLETS = 100,
+        AMOUNT_OF_BLUE_BULLETS = 60,
         PLAYER_DOM_ID = 'player',
         PLAYER_STARTING_POSITION_LEFT = 3,
         PLAYER_STARTING_POSITION_TOP = null;

@@ -28,8 +28,8 @@ var Game = (function () {
         gameInitialLoad.enemyManager = new EnemyManager();
 
         enemyInterval = setInterval(function(){
-            gameInitialLoad.enemyManager.spawn(new EnemyBuilder());
-        }, 3000);
+            gameInitialLoad.enemyManager.spawn(new EnemyBuilder(Math.random() * 500));
+        }, 1000);
 
         Game.start();
     }

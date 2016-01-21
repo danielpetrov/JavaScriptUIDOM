@@ -16,7 +16,7 @@ var EnemyManager = (function (parent) {
             this.onGameLoop(this.subscribers[i]);
 
             if(this.subscribers[i].positionLeft < -130){
-               // document.body.removeChild(this.subscribers[i].dom);
+                //document.body.removeChild(this.subscribers[i].dom);
                 //this.subscribers.splice(i, 1);
                 Game.pause();
                 alert("GAME OVER");
@@ -24,8 +24,9 @@ var EnemyManager = (function (parent) {
 
             for(var bullet in bullets.subscribers){
                 if( (bullets.subscribers[bullet].positionTop > this.subscribers[i].positionTop)
-                    && (bullets.subscribers[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeHeight))
-               && (bullets.subscribers[bullet].positionLeft > this.subscribers[i].positionLeft)){
+                    && (bullets.subscribers[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeWidth))
+               && (bullets.subscribers[bullet].positionLeft > this.subscribers[i].positionLeft)
+                && bullets.subscribers[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeHeight)){
 
                     this.subscribers[i].health -= bullets.subscribers[bullet].bulletDamage;
                     if(this.subscribers[i].health <= 0){
