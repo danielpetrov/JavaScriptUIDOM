@@ -3,7 +3,7 @@ var EnemyBuilder = (function (parent) {
 
     var ENEMY_HEALTH = 50,
         ENEMY_DOM_CLASS = 'enemy',
-        ENEMY_STARTING_POSITION_LEFT = 1200,
+        ENEMY_STARTING_POSITION_LEFT = 500,
         ENEMY_STARTING_POSITION_TOP = 250;
 
     EnemyBuilder.prototype = Object.create(parent.prototype);
@@ -12,6 +12,7 @@ var EnemyBuilder = (function (parent) {
         parent.call(this);
 
         positionTop = positionTop || ENEMY_STARTING_POSITION_TOP;
+        ENEMY_STARTING_POSITION_LEFT = Game.getContextValue('width');
 
         this.positionLeft = ENEMY_STARTING_POSITION_LEFT;
         this.positionTop = positionTop;

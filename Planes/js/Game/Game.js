@@ -7,7 +7,8 @@ var Game = (function () {
         player,
         infoBox,
         GAME_SPEED = 10,
-        enemyInterval;
+        enemyInterval,
+        ENEMY_LEVEL1_HEIGHT;
 
     function init() {
         gameInitialLoad.addEventListeners();
@@ -28,7 +29,7 @@ var Game = (function () {
         gameInitialLoad.enemyManager = new EnemyManager();
 
         enemyInterval = setInterval(function(){
-            gameInitialLoad.enemyManager.spawn(new EnemyBuilder(Math.random() * 400));
+            gameInitialLoad.enemyManager.spawn(new EnemyBuilder(Math.random() * (Game.getContextValue('height') - ENEMY_LEVEL1_HEIGHT)));
         }, 2000);
 
         Game.start();
