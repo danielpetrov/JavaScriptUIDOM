@@ -1,18 +1,18 @@
-var EnemyLevel1Builder = (function (parent) {
+var BossLevel1Builder = (function (parent) {
     'use strict';
 
-    var PLANE_WIDTH = 128,
-        PLANE_HEIGHT = 128,
-        PLANE_SPEED = 8,
-        ENEMY_HEALTH = 50,
-        PLANE_IMAGE = "url('img/enemyLevel1.png') no-repeat",
-        ENEMY_STARTING_POSITION_LEFT = 1300,
+    var PLANE_WIDTH = 194,
+        PLANE_HEIGHT = 103,
+        PLANE_SPEED = 7,
+        ENEMY_HEALTH = 500,
+        PLANE_IMAGE = "url('img/bossLevel1.png') no-repeat",
+        ENEMY_STARTING_POSITION_LEFT = 1100,
         ENEMY_STARTING_POSITION_TOP = 250;
 
 
-    EnemyLevel1Builder.prototype = Object.create(parent.prototype);
+    BossLevel1Builder.prototype = Object.create(parent.prototype);
 
-    function EnemyLevel1Builder(positionTop) {
+    function BossLevel1Builder(positionTop) {
         parent.call(this);
 
         this.positionTop = positionTop || ENEMY_STARTING_POSITION_TOP;
@@ -33,12 +33,18 @@ var EnemyLevel1Builder = (function (parent) {
         this.health = ENEMY_HEALTH;
     }
 
-    EnemyLevel1Builder.prototype.move = function () {
+    BossLevel1Builder.prototype.move = function () {
         parent.prototype.move.call(this);
-        this.positionLeft -= this.speed;
+        this.positionLeft -= 0.4;
+        if(this.positionTop <= 0){
+            this.speed = -this.speed;
+        } else if(this.positionTop >= Game.getContextValue('height') - this.planeHeight){
+            this.speed = -this.speed;
+        }
+        this.positionTop += this.speed;
     };
 
-    return EnemyLevel1Builder;
+    return BossLevel1Builder;
 
 })(WorldObject);
 

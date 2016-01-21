@@ -1,31 +1,38 @@
-var EnemyBuilder = (function (parent) {
+var EnemyBuilder = (function (enemyLevel1, bossLevel1, parent) {
     'use strict';
 
-    var ENEMY_HEALTH = 50,
-        ENEMY_DOM_CLASS = 'enemy',
-        ENEMY_STARTING_POSITION_LEFT = 500,
-        ENEMY_STARTING_POSITION_TOP = 250;
+    var ENEMY_DOM_CLASS = 'enemy';
 
     EnemyBuilder.prototype = Object.create(parent.prototype);
 
-    function EnemyBuilder(positionTop) {
-        parent.call(this);
+    function EnemyBuilder(positionTop, type) {
+        this.type = type;
 
-        positionTop = positionTop || ENEMY_STARTING_POSITION_TOP;
-        ENEMY_STARTING_POSITION_LEFT = Game.getContextValue('width');
-
-        this.positionLeft = ENEMY_STARTING_POSITION_LEFT;
-        this.positionTop = positionTop;
-
-        this.dom.style.left = ENEMY_STARTING_POSITION_LEFT + 'px';
-        this.dom.style.top = ENEMY_STARTING_POSITION_TOP + 'px';
-
-        this.health = ENEMY_HEALTH;
+        switch(this.type){
+            case ENEMY_TYPE.ENEMY_TYPE_LEVEL_1:
+                enemyLevel1.call(this, positionTop);
+                break;
+            case ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1:
+                bossLevel1.call(this, positionTop);
+                break;
+            default:
+                enemyLevel1.call(this, positionTop);
+                break;
+        }
     }
 
     EnemyBuilder.prototype.move = function () {
-        parent.prototype.move.call(this);
-        this.positionLeft -= this.speed;
+        switch(this.type){
+            case ENEMY_TYPE.ENEMY_TYPE_LEVEL_1:
+                enemyLevel1.prototype.move.call(this);
+                break;
+            case ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1:
+                bossLevel1.prototype.move.call(this);
+                break;
+            default:
+                enemyLevel1.prototype.move.call(this);
+                break;
+        }
     };
 
     EnemyBuilder.prototype.getCssClass = function () {
@@ -34,4 +41,4 @@ var EnemyBuilder = (function (parent) {
 
     return EnemyBuilder;
 
-})(EnemyLevel1Builder);
+})(EnemyLevel1Builder, BossLevel1Builder, WorldObject);

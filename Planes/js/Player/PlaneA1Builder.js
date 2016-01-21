@@ -9,7 +9,7 @@ var PlaneA1Builder = (function (parent) {
     PlaneA1Builder.prototype = Object.create(parent.prototype);
 
     function PlaneA1Builder() {
-        parent.call(this, dom);
+        parent.call(this);
 
         this.dom.style.width = PLANE_WIDTH + 'px';
         this.dom.style.height = PLANE_HEIGHT + 'px';

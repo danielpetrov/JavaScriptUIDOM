@@ -19,24 +19,29 @@ var EnemyManager = (function (parent) {
                 //document.body.removeChild(this.subscribers[i].dom);
                 //this.subscribers.splice(i, 1);
                 Game.pause();
-                alert("GAME OVER");
+                alert("GAME OVER!!!");
             }
 
             for(var bullet in bullets.subscribers){
                 if( (bullets.subscribers[bullet].positionTop > this.subscribers[i].positionTop)
-                    && (bullets.subscribers[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeWidth))
+                    && (bullets.subscribers[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeHeight))
                && (bullets.subscribers[bullet].positionLeft > this.subscribers[i].positionLeft)
-                && bullets.subscribers[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeHeight)){
+                && bullets.subscribers[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeWidth)){
 
                     this.subscribers[i].health -= bullets.subscribers[bullet].bulletDamage;
                     if(this.subscribers[i].health <= 0){
+                        if(this.subscribers[i].type === ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1){
+                            document.body.removeChild(this.subscribers[i].dom);
+                            Game.pause();
+                            alert("YOU WIN!!!");
+                        }
+
                         document.body.removeChild(this.subscribers[i].dom);
                         this.subscribers.splice(i, 1);
                     }
 
                     document.body.removeChild(bullets.subscribers[bullet].dom);
                     bullets.subscribers.splice(bullet, 1);
-
 
                     break;
                 }

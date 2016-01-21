@@ -30,9 +30,7 @@ var BulletManager = (function (parent) {
                     break;
                 }
             }
-
         }
-
     };
 
     return BulletManager;

@@ -1,7 +1,5 @@
 var Player = (function (parent) {
     'use strict';
-    var ORANGE_BULET_TYPE = 'orange',
-        BLUE_BULLET_TYPE = 'blue';
 
     Player.prototype = Object.create(parent.prototype);
 
@@ -19,12 +17,12 @@ var Player = (function (parent) {
     function addBullets(amount, bulletType) {
 
         switch(bulletType){
-            case ORANGE_BULET_TYPE:
+            case BULLET_TYPE.ORANGE_BULLET:
                 if(!(this.amountOfBullets.orangeBullets == 0 && amount < 0)){
                     this.amountOfBullets.orangeBullets += amount;
                 }
                 break;
-            case BLUE_BULLET_TYPE:
+            case BULLET_TYPE.BLUE_BULLET:
                 if(!(this.amountOfBullets.blueBullets == 0 && amount < 0)){
                     this.amountOfBullets.blueBullets += amount;
                 }

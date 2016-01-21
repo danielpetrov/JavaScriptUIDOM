@@ -1,6 +1,5 @@
 var Game = (function () {
     'use strict';
-    //I did some refacturing and switched to reavealing module pattern instead
 
     var stage,
         gameInterval,
@@ -8,7 +7,8 @@ var Game = (function () {
         infoBox,
         GAME_SPEED = 10,
         enemyInterval,
-        ENEMY_LEVEL1_HEIGHT;
+        ENEMY_LEVEL1_HEIGHT = 128,
+        BOSS_LEVEL1_HEIGHT = 194;
 
     function init() {
         gameInitialLoad.addEventListeners();
@@ -28,9 +28,18 @@ var Game = (function () {
 
         gameInitialLoad.enemyManager = new EnemyManager();
 
+        //level1
         enemyInterval = setInterval(function(){
-            gameInitialLoad.enemyManager.spawn(new EnemyBuilder(Math.random() * (Game.getContextValue('height') - ENEMY_LEVEL1_HEIGHT)));
-        }, 2000);
+            gameInitialLoad.enemyManager.spawn(
+                new EnemyBuilder(Math.random() * (Game.getContextValue('height') - ENEMY_LEVEL1_HEIGHT)
+                    ,ENEMY_TYPE.ENEMY_TYPE_LEVEL_1));
+        }, 1900);
+
+        setTimeout(function(){
+            gameInitialLoad.enemyManager.spawn(
+                new EnemyBuilder(Math.random() * (Game.getContextValue('height') - BOSS_LEVEL1_HEIGHT)
+                    ,ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1));
+        }, 20000);
 
         Game.start();
     }

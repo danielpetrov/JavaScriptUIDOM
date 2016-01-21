@@ -4,8 +4,6 @@ var PlayerManager = (function (parent) {
     var bulletPossLeft,
         bulletPossTop,
         FIRE_SPEED = 4,
-        BULLET_TYPE_ORANGE = 'orange',
-        BULLET_TYPE_BLUE = 'blue',
         ONE_SECOND_TIMEOUT = 1000,
         hasShot = false;
 
@@ -21,13 +19,13 @@ var PlayerManager = (function (parent) {
         this.isShooting = false;
         this.bulletManager = new BulletManager();
         this.fireSpeed = FIRE_SPEED;
-        this.bulletType = BULLET_TYPE_ORANGE;
+        this.bulletType = BULLET_TYPE.ORANGE_BULLET;
     }
 
     PlayerManager.prototype.onGameLoop = function (player) {
         if (this.isShooting) {
-            if(this.bulletType ==  BULLET_TYPE_ORANGE && player.amountOfBullets.orangeBullets > 0 ||
-                this.bulletType ==  BULLET_TYPE_BLUE && player.amountOfBullets.blueBullets > 0){
+            if(this.bulletType ==  BULLET_TYPE.ORANGE_BULLET && player.amountOfBullets.orangeBullets > 0 ||
+                this.bulletType ==  BULLET_TYPE.BLUE_BULLET && player.amountOfBullets.blueBullets > 0){
 
                 //width and height are reversed becouse it is rotated 90 degrees
                 bulletPossLeft = player.positionLeft + player.planeHeight;
@@ -84,10 +82,10 @@ var PlayerManager = (function (parent) {
                 this.isShooting = value;
                 break;
             case 49:
-                this.bulletType = BULLET_TYPE_ORANGE;
+                this.bulletType = BULLET_TYPE.ORANGE_BULLET;
                 break;
             case 50:
-                this.bulletType = BULLET_TYPE_BLUE;
+                this.bulletType = BULLET_TYPE.BLUE_BULLET;
                 break;
             default:
                 break;
