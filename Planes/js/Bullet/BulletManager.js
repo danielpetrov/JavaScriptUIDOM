@@ -11,7 +11,7 @@ var BulletManager = (function (parent) {
         bullet.move();
     };
 
-    BulletManager.prototype.publish = function (enemy) {
+    BulletManager.prototype.publish = function () {
         for (var i = 0; i < this.subscribers.length; i++) {
             this.onGameLoop(this.subscribers[i]);
 
@@ -19,18 +19,7 @@ var BulletManager = (function (parent) {
                 document.body.removeChild(this.subscribers[i].dom);
                 this.subscribers.splice(i, 1);
             }
-
-            for(var enemy in enemy.subscribers){
-                if( (this.subscribers[i].positionTop > enemy.subscribers[i].positionTop)
-                    && (this.subscribers[i].positionTop < (enemy.subscribers[i].positionTop + enemy.subscribers[i].planeHeight))
-                    && (this.subscribers[i].positionLeft > enemy.subscribers[i].positionLeft)){
-
-                    document.body.removeChild(this.subscribers[i].dom);
-                    this.subscribers.splice(i, 1);
-                    break;
-                }
-            }
-        }
+         }
     };
 
     return BulletManager;

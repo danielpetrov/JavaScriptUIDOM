@@ -8,35 +8,50 @@ var Game = (function () {
         GAME_SPEED = 10,
         enemyInterval,
         ENEMY_LEVEL1_HEIGHT = 128,
-        BOSS_LEVEL1_HEIGHT = 194;
+        BOSS_LEVEL1_HEIGHT = 194,
+        subscribers = {
+            player: null,
+            bullet: null,
+            enemy: null,
+            infoBox: null
+        },
+        context = {
+            width: null,
+            height: null
+         };
 
     function init() {
-        gameInitialLoad.addEventListeners();
-        gameInitialLoad.context.width = window.innerWidth;
-        gameInitialLoad.context.height = window.innerHeight;
+        addEventListeners(gameLoop);
+
+        context.width = window.innerWidth;
+        context.height = window.innerHeight;
 
         stage = new Background();
         stage.init();
 
-        gameInitialLoad.playerManager = new PlayerManager();
+        gameLoop.playerManager = new PlayerManager();
         player = new Player();
-        gameInitialLoad.playerManager.spawn(player);
+        gameLoop.playerManager.spawn(player);
+        subscribers.player = player;
+        subscribers.bullet = gameLoop.playerManager.bulletManager.subscribers;
 
-        gameInitialLoad.infoBoxManager = new InfoBoxManager();
+        gameLoop.infoBoxManager = new InfoBoxManager();
         infoBox = new InfoBox(player);
-        gameInitialLoad.infoBoxManager.spawn(infoBox);
+        gameLoop.infoBoxManager.spawn(infoBox);
+        subscribers.infoBox = infoBox;
 
-        gameInitialLoad.enemyManager = new EnemyManager();
+        gameLoop.enemyManager = new EnemyManager();
+        subscribers.enemy = gameLoop.enemyManager.subscribers;
 
         //level1
         enemyInterval = setInterval(function(){
-            gameInitialLoad.enemyManager.spawn(
+            gameLoop.enemyManager.spawn(
                 new EnemyBuilder(Math.random() * (Game.getContextValue('height') - ENEMY_LEVEL1_HEIGHT)
                     ,ENEMY_TYPE.ENEMY_TYPE_LEVEL_1));
         }, 1900);
 
         setTimeout(function(){
-            gameInitialLoad.enemyManager.spawn(
+            gameLoop.enemyManager.spawn(
                 new EnemyBuilder(Math.random() * (Game.getContextValue('height') - BOSS_LEVEL1_HEIGHT)
                     ,ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1));
         }, 20000);
@@ -46,7 +61,7 @@ var Game = (function () {
 
     function start() {
         gameInterval = setInterval(function () {
-            gameInitialLoad.mainLoop(infoBox, player);
+            gameLoop.mainLoop(subscribers);
             stage.move();
         }, GAME_SPEED);
     }
@@ -57,7 +72,19 @@ var Game = (function () {
     }
 
     function getContextValue(key) {
-        return gameInitialLoad.context[key];
+        return context[key];
+    }
+
+    function addEventListeners(controller) {
+        window.onscroll = function () {
+            return false;
+        };
+        document.addEventListener('keydown', function (e) {
+            controller.playerManager.keyboardListener(e);
+        });
+        document.addEventListener('keyup', function (e) {
+            controller.playerManager.keyboardListener(e);
+        });
     }
 
     return {

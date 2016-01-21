@@ -16,7 +16,7 @@ var EnemyManager = (function (parent) {
             this.onGameLoop(this.subscribers[i]);
 
             if(this.subscribers[i].positionLeft < -130){
-
+                //if enemy ship hits base
                 player.addHealth(-this.subscribers[i].damageToBase);
                 if(player.health <= 0){
                     Game.pause();
@@ -27,19 +27,19 @@ var EnemyManager = (function (parent) {
                 break;
             }
 
-            for(var bullet in bullets.subscribers){
+            for(var bullet in bullets){
                 //if bullet hits enemy
-                if( (bullets.subscribers[bullet].positionTop > this.subscribers[i].positionTop)
-                    && (bullets.subscribers[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeHeight))
-               && (bullets.subscribers[bullet].positionLeft > this.subscribers[i].positionLeft)
-                && bullets.subscribers[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeWidth)){
+                if( (bullets[bullet].positionTop > this.subscribers[i].positionTop)
+                    && (bullets[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeHeight))
+                    && (bullets[bullet].positionLeft > this.subscribers[i].positionLeft)
+                    && bullets[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeWidth)){
 
                     //taking health from enemy
-                    this.subscribers[i].health -= bullets.subscribers[bullet].bulletDamage;
+                    this.subscribers[i].health -= bullets[bullet].bulletDamage;
 
                     //addingScorepoints when hitting boss with bullets
                     if(this.subscribers[i].type === ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1){
-                        SCORE_POINTS.SCORE_POINTS += bullets.subscribers[bullet].bulletDamage;
+                        SCORE_POINTS.SCORE_POINTS += bullets[bullet].bulletDamage;
                     }
 
                     //if enemy is destroyed
@@ -58,10 +58,9 @@ var EnemyManager = (function (parent) {
                         this.subscribers.splice(i, 1);
                     }
 
-                    document.body.removeChild(bullets.subscribers[bullet].dom);
-                    bullets.subscribers.splice(bullet, 1);
+                    document.body.removeChild(bullets[bullet].dom);
+                    bullets.splice(bullet, 1);
 
-                    break;
                 }
             }
         }
