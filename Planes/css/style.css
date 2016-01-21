@@ -9,13 +9,28 @@ body {
 
 }
 
-.stage {
+.infoBox {
+    z-index: 7;
+    position: fixed;
+    background-image: url(../img/orangeBulletSmall.png), url(../img/blueBulletSmall.png);
+    background-position: 30px 5px, 30px 30px;
+    background-repeat: no-repeat;
+    background-color: antiquewhite;
+    border: 1px solid orangered;
+}
+
+#blue, #orange, #score, .enemy, #player, .bullet, .stage {
     position: absolute;
+}
+
+.bullet {
+    z-index: 5;
+}
+.stage {
     z-index: 1;
 }
 
 #player{
-    position: absolute;
     margin: 0;
     z-index: 2;
     -webkit-transform: rotate(90deg);
@@ -25,31 +40,7 @@ body {
     transform: rotate(90deg);
 }
 
-.bullet {
-    z-index: 5;
-    position: absolute;
-}
-
-.infoBox {
-    z-index: 7;
-    position: fixed;
-    background-image: url(../img/orangeBulletSmall.png), url(../img/blueBulletSmall.png);
-    background-position: 0px 20px, 50px 20px;
-    background-repeat: no-repeat;
-    background-color: antiquewhite;
-    border: 1px solid orangered;
-}
-
-#blue{
-    position: fixed;
-}
-
-#orange{
-    position: fixed;
-}
-
 .enemy{
-    position: absolute;
     margin: 0;
     z-index: 2;
     -webkit-transform: rotate(90deg);

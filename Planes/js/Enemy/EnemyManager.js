@@ -23,13 +23,26 @@ var EnemyManager = (function (parent) {
             }
 
             for(var bullet in bullets.subscribers){
+                //if bullet hits enemy
                 if( (bullets.subscribers[bullet].positionTop > this.subscribers[i].positionTop)
                     && (bullets.subscribers[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeHeight))
                && (bullets.subscribers[bullet].positionLeft > this.subscribers[i].positionLeft)
                 && bullets.subscribers[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeWidth)){
 
+                    //taking health from enemy
                     this.subscribers[i].health -= bullets.subscribers[bullet].bulletDamage;
+
+                    //addingScorepoints when hitting boss with bullets
+                    if(this.subscribers[i].type === ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1){
+                        SCORE_POINTS.SCORE_POINTS += bullets.subscribers[bullet].bulletDamage;
+                    }
+
+                    //if enemy is destroyed
                     if(this.subscribers[i].health <= 0){
+                        //adding socre points here
+                        SCORE_POINTS.SCORE_POINTS += this.subscribers[i].scorePoints;
+
+                        //if boss is destroyed
                         if(this.subscribers[i].type === ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1){
                             document.body.removeChild(this.subscribers[i].dom);
                             Game.pause();

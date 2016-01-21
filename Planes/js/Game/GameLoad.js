@@ -1,5 +1,6 @@
 var gameInitialLoad = (function () {
     'use strict';
+
     var hasShot = false,
         ONE_SECOND_TIMEOUT = 1000;
 

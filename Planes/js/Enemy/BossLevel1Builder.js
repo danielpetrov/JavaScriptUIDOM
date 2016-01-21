@@ -7,7 +7,8 @@ var BossLevel1Builder = (function (parent) {
         ENEMY_HEALTH = 500,
         PLANE_IMAGE = "url('img/bossLevel1.png') no-repeat",
         ENEMY_STARTING_POSITION_LEFT = 1100,
-        ENEMY_STARTING_POSITION_TOP = 250;
+        ENEMY_STARTING_POSITION_TOP = 250,
+        SCORE_POINTS = 300;
 
 
     BossLevel1Builder.prototype = Object.create(parent.prototype);
@@ -31,6 +32,7 @@ var BossLevel1Builder = (function (parent) {
         this.planeHeight = PLANE_HEIGHT;
         this.speed = PLANE_SPEED;
         this.health = ENEMY_HEALTH;
+        this.scorePoints = SCORE_POINTS;
     }
 
     BossLevel1Builder.prototype.move = function () {
