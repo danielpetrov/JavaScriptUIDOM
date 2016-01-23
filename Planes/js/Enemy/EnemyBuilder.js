@@ -19,6 +19,11 @@ var EnemyBuilder = (function (enemyLevel1, bossLevel1, parent) {
                 enemyLevel1.call(this, positionTop);
                 break;
         }
+
+        this.maxHealth = this.health;
+        this.HealthBar = new HealthBar(this.planeWidth/2, 5);
+        this.HealthBar.setProgress(100);
+        this.dom.appendChild(this.HealthBar.container);
     }
 
     EnemyBuilder.prototype.move = function () {
@@ -37,6 +42,12 @@ var EnemyBuilder = (function (enemyLevel1, bossLevel1, parent) {
 
     EnemyBuilder.prototype.getCssClass = function () {
         return ENEMY_DOM_CLASS;
+    };
+
+    EnemyBuilder.prototype.takeDamage = function (damage) {
+        //moves health progress with percent of the health
+        this.HealthBar.moveProgress( -((damage / this.maxHealth) * 100) );
+        this.health -= damage;
     };
 
     return EnemyBuilder;

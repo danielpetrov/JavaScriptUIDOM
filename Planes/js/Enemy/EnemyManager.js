@@ -28,6 +28,7 @@ var EnemyManager = (function (parent) {
             }
 
             for(var bullet in bullets){
+
                 //if bullet hits enemy
                 if( (bullets[bullet].positionTop > this.subscribers[i].positionTop)
                     && (bullets[bullet].positionTop < (this.subscribers[i].positionTop + this.subscribers[i].planeHeight))
@@ -35,7 +36,7 @@ var EnemyManager = (function (parent) {
                     && bullets[bullet].positionLeft < (this.subscribers[i].positionLeft + this.subscribers[i].planeWidth)){
 
                     //taking health from enemy
-                    this.subscribers[i].health -= bullets[bullet].bulletDamage;
+                    this.subscribers[i].takeDamage(bullets[bullet].bulletDamage);
 
                     //addingScorepoints when hitting boss with bullets
                     if(this.subscribers[i].type === ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1){

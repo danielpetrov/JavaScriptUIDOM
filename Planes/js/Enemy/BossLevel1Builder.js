@@ -3,11 +3,9 @@ var BossLevel1Builder = (function (parent) {
 
     var PLANE_WIDTH = 194,
         PLANE_HEIGHT = 103,
-        PLANE_SPEED = 7,
+        PLANE_SPEED = 2,
         ENEMY_HEALTH = 500,
         PLANE_IMAGE = "url('img/bossLevel1.png') no-repeat",
-        ENEMY_STARTING_POSITION_LEFT = 1100,
-        ENEMY_STARTING_POSITION_TOP = 250,
         SCORE_POINTS = 300,
         DAMAGE_TO_BASE = 120;
 
@@ -17,20 +15,17 @@ var BossLevel1Builder = (function (parent) {
     function BossLevel1Builder(positionTop) {
         parent.call(this);
 
-        this.positionTop = positionTop || ENEMY_STARTING_POSITION_TOP;
-
-        ENEMY_STARTING_POSITION_LEFT = Game.getContextValue('width');
-        this.positionLeft = ENEMY_STARTING_POSITION_LEFT;
-
-        this.dom.style.left = ENEMY_STARTING_POSITION_LEFT + 'px';
-        this.dom.style.top = ENEMY_STARTING_POSITION_TOP + 'px';
-
-        this.dom.style.width = PLANE_WIDTH + 'px';
-        this.dom.style.height = PLANE_HEIGHT + 'px';
+        this.positionTop = positionTop;
+        this.positionLeft = Game.getContextValue('width');
+        this.dom.style.top = this.positionTop + 'px';
+        this.dom.style.left = this.positionLeft + 'px';
         this.dom.style.background = PLANE_IMAGE;
 
         this.planeWidth = PLANE_WIDTH;
         this.planeHeight = PLANE_HEIGHT;
+        this.dom.style.width = this.planeWidth + 'px';
+        this.dom.style.height = this.planeHeight + 'px';
+
         this.speed = PLANE_SPEED;
         this.health = ENEMY_HEALTH;
         this.scorePoints = SCORE_POINTS;

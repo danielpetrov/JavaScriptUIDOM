@@ -3,11 +3,9 @@ var EnemyLevel1Builder = (function (parent) {
 
     var PLANE_WIDTH = 128,
         PLANE_HEIGHT = 128,
-        PLANE_SPEED = 8,
+        PLANE_SPEED = 1,
         ENEMY_HEALTH = 50,
         PLANE_IMAGE = "url('img/enemyLevel1.png') no-repeat",
-        ENEMY_STARTING_POSITION_LEFT = 1300,
-        ENEMY_STARTING_POSITION_TOP = 250,
         SCORE_POINTS = 25,
         DAMAGE_TO_BASE = 35;
 
@@ -17,24 +15,23 @@ var EnemyLevel1Builder = (function (parent) {
     function EnemyLevel1Builder(positionTop) {
         parent.call(this);
 
-        this.positionTop = positionTop || ENEMY_STARTING_POSITION_TOP;
-
-        ENEMY_STARTING_POSITION_LEFT = Game.getContextValue('width');
-        this.positionLeft = ENEMY_STARTING_POSITION_LEFT;
-
-        this.dom.style.left = ENEMY_STARTING_POSITION_LEFT + 'px';
-        this.dom.style.top = ENEMY_STARTING_POSITION_TOP + 'px';
+        this.positionTop = positionTop;
+        this.positionLeft = Game.getContextValue('width');
+        this.dom.style.top = this.positionTop + 'px';
+        this.dom.style.left = this.positionLeft + 'px';
+        this.dom.style.background = PLANE_IMAGE;
 
         this.dom.style.width = PLANE_WIDTH + 'px';
         this.dom.style.height = PLANE_HEIGHT + 'px';
-        this.dom.style.background = PLANE_IMAGE;
-
         this.planeWidth = PLANE_WIDTH;
         this.planeHeight = PLANE_HEIGHT;
+
         this.speed = PLANE_SPEED;
         this.health = ENEMY_HEALTH;
         this.scorePoints = SCORE_POINTS;
         this.damageToBase = DAMAGE_TO_BASE;
+
+        //inverted, because ship is rotated 90
     }
 
     EnemyLevel1Builder.prototype.move = function () {
