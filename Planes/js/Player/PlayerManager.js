@@ -61,6 +61,52 @@ var PlayerManager = (function (parent) {
         this.bulletManager.spawn(new Bullet(bulletPossLeft, bulletPossTop, this.bulletType));
     };
 
+    PlayerManager.prototype.publish = function (bullets, enemies) {
+        this.onGameLoop(this.subscribers[0]);
+
+        //check if player is hitted by bullet
+        for(var bullet in bullets) {
+            if ((bullets[bullet].positionTop > this.subscribers[0].positionTop)
+                && (bullets[bullet].positionTop < (this.subscribers[0].positionTop + this.subscribers[0].planeHeight))
+                && (bullets[bullet].positionLeft > this.subscribers[0].positionLeft)
+                && bullets[bullet].positionLeft < (this.subscribers[0].positionLeft + this.subscribers[0].planeWidth)) {
+
+                //player takes damage
+                this.subscribers[0].addHealth( -bullets[bullet].bulletDamage );
+
+                document.body.removeChild(bullets[bullet].dom);
+                bullets.splice(bullet, 1);
+
+                if(this.subscribers[0].health <= 0){
+                    alert("GAME OVER!!!");
+                    Game.pause();
+                    break;
+                }
+            }
+        }
+
+        //if enemy and player ship collide
+        for (var enemy in enemies) {
+            if ((enemies[enemy].positionTop > this.subscribers[0].positionTop)
+                && (enemies[enemy].positionTop < (this.subscribers[0].positionTop + this.subscribers[0].planeHeight))
+                && (enemies[enemy].positionLeft > this.subscribers[0].positionLeft)
+                && enemies[enemy].positionLeft < (this.subscribers[0].positionLeft + this.subscribers[0].planeWidth)) {
+
+                this.subscribers[0].addHealth( -enemies[enemy].damageToBase );
+
+                document.body.removeChild(enemies[enemy].dom);
+                enemies.splice(enemy, 1);
+
+                if (this.subscribers[0].health <= 0) {
+                    alert("GAME OVER!!!");
+                    Game.pause();
+                    break;
+                }
+            }
+        }
+
+    };
+
     PlayerManager.prototype.keyboardListener = function (e) {
 
         var value = e.type == 'keydown';

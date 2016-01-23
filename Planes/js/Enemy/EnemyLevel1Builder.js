@@ -3,7 +3,7 @@ var EnemyLevel1Builder = (function (parent) {
 
     var PLANE_WIDTH = 128,
         PLANE_HEIGHT = 128,
-        PLANE_SPEED = 1,
+        PLANE_SPEED = 3,
         ENEMY_HEALTH = 50,
         PLANE_IMAGE = "url('img/enemyLevel1.png') no-repeat",
         SCORE_POINTS = 25,

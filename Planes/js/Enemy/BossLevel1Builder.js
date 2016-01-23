@@ -34,7 +34,7 @@ var BossLevel1Builder = (function (parent) {
 
     BossLevel1Builder.prototype.move = function () {
         parent.prototype.move.call(this);
-        this.positionLeft -= 0.4;
+        this.positionLeft -= 0.2;
         if(this.positionTop <= 0){
             this.speed = -this.speed;
         } else if(this.positionTop >= Game.getContextValue('height') - this.planeHeight){

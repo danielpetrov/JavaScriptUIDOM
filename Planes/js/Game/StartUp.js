@@ -3,7 +3,8 @@ window.onload = function () {
 };
 window.BULLET_TYPE = {
     BLUE_BULLET : 'blue',
-    ORANGE_BULLET : 'orange'
+    ORANGE_BULLET : 'orange',
+    PURPLE_BULLET : 'purple'
 };
 window.ENEMY_TYPE = {
     ENEMY_TYPE_LEVEL_1 : 'level1',

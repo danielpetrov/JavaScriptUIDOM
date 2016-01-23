@@ -8,7 +8,7 @@ var BulletManager = (function (parent) {
     }
 
     BulletManager.prototype.onGameLoop = function (bullet) {
-        bullet.move();
+        bullet.move(bullet.isEnemy);
     };
 
     BulletManager.prototype.publish = function () {

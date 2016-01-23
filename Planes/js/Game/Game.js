@@ -11,8 +11,9 @@ var Game = (function () {
         BOSS_LEVEL1_HEIGHT = 194,
         subscribers = {
             player: null,
-            bullet: null,
+            playerBullet: null,
             enemy: null,
+            enemyBullets: null,
             infoBox: null
         },
         context = {
@@ -33,7 +34,7 @@ var Game = (function () {
         player = new Player();
         gameLoop.playerManager.spawn(player);
         subscribers.player = player;
-        subscribers.bullet = gameLoop.playerManager.bulletManager.subscribers;
+        subscribers.playerBullets = gameLoop.playerManager.bulletManager.subscribers;
 
         gameLoop.infoBoxManager = new InfoBoxManager();
         infoBox = new InfoBox(player);
@@ -42,13 +43,14 @@ var Game = (function () {
 
         gameLoop.enemyManager = new EnemyManager();
         subscribers.enemy = gameLoop.enemyManager.subscribers;
+        subscribers.enemyBullets = gameLoop.enemyManager.bulletManager.subscribers;
 
         //level1
         enemyInterval = setInterval(function(){
             gameLoop.enemyManager.spawn(
                 new EnemyBuilder(Math.random() * (Game.getContextValue('height') - ENEMY_LEVEL1_HEIGHT)
                     ,ENEMY_TYPE.ENEMY_TYPE_LEVEL_1));
-        }, 1900);
+        }, 1600);
 
         setTimeout(function(){
             gameLoop.enemyManager.spawn(

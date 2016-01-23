@@ -1,13 +1,13 @@
-var Bullet = (function (orangeBullet, blueBullet, parent) {
+var Bullet = (function (orangeBullet, blueBullet, purpleBullet, parent) {
     'use strict';
 
     var self = {};
 
     Bullet.prototype = Object.create(parent.prototype);
 
-    function Bullet(possLeft, possTop, type) {
+    function Bullet(possLeft, possTop, type, isEnemy) {
         self.bulletType = type;
-
+        debugger;
         switch (self.bulletType) {
             case BULLET_TYPE.ORANGE_BULLET:
                 orangeBullet.call(this, possLeft, possTop);
@@ -15,16 +15,24 @@ var Bullet = (function (orangeBullet, blueBullet, parent) {
             case BULLET_TYPE.BLUE_BULLET:
                 blueBullet.call(this, possLeft, possTop);
                 break;
+            case BULLET_TYPE.PURPLE_BULLET:
+                purpleBullet.call(this, possLeft, possTop);
+                break;
             default:
                 orangeBullet.call(this, possLeft, possTop);
                 break;
         }
 
+        this.isEnemy = isEnemy;
     }
 
-    Bullet.prototype.move = function () {
+    Bullet.prototype.move = function (isEnemy) {
         parent.prototype.move.call(this);
-        this.positionLeft += this.speed;
+        if(isEnemy){
+            this.positionLeft -= this.speed;
+        } else {
+            this.positionLeft += this.speed;
+        }
     };
 
     Bullet.prototype.getCssClass = function () {
@@ -32,4 +40,4 @@ var Bullet = (function (orangeBullet, blueBullet, parent) {
     };
 
     return Bullet;
-})(BulletOrangeBuilder, BulletBlueBuilder, WorldObject);
+})(BulletOrangeBuilder, BulletBlueBuilder, BulletPurpleBuilder, WorldObject);

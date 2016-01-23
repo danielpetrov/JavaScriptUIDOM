@@ -5,10 +5,28 @@ var EnemyManager = (function (parent) {
 
     function EnemyManager() {
         parent.call(this);
+        this.bulletManager = new BulletManager();
     }
 
     EnemyManager.prototype.onGameLoop = function (enemy) {
         enemy.move();
+        this.shoot(enemy);
+    };
+
+    EnemyManager.prototype.shoot = function (enemy){
+        var percentage;
+        if(enemy.type === ENEMY_TYPE.ENEMY_TYPE_BOSS_LEVEL_1){
+            percentage = 0.3;
+        } else {
+            percentage = 0.1
+        }
+
+        if((Math.random() * 100) < percentage){
+            this.bulletManager.spawn(new Bullet(enemy.positionLeft, ( enemy.positionTop + (enemy.planeWidth / 4) ), BULLET_TYPE.PURPLE_BULLET, true));
+        }
+        if((Math.random() * 100) < percentage){
+            this.bulletManager.spawn(new Bullet(enemy.positionLeft, ( enemy.positionTop + (enemy.planeWidth / 2) ), BULLET_TYPE.PURPLE_BULLET, true));
+        }
     };
 
     EnemyManager.prototype.publish = function (bullets, player) {
@@ -17,11 +35,6 @@ var EnemyManager = (function (parent) {
 
             if(this.subscribers[i].positionLeft < -130){
                 //if enemy ship hits base
-                player.addHealth(-this.subscribers[i].damageToBase);
-                if(player.health <= 0){
-                    Game.pause();
-                    alert("GAME OVER!!!");
-                }
                 document.body.removeChild(this.subscribers[i].dom);
                 this.subscribers.splice(i, 1);
                 break;
@@ -53,6 +66,7 @@ var EnemyManager = (function (parent) {
                             document.body.removeChild(this.subscribers[i].dom);
                             Game.pause();
                             alert("YOU WIN!!!");
+                            break;
                         }
 
                         document.body.removeChild(this.subscribers[i].dom);

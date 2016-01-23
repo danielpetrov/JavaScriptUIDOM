@@ -6,9 +6,10 @@ var gameLoop = (function () {
 
     function mainLoop(subscribers) {
 
-        gameLoop.playerManager.publish();
+        gameLoop.playerManager.publish(subscribers.enemyBullets, subscribers.enemy);
         gameLoop.infoBoxManager.publish();
         gameLoop.playerManager.bulletManager.publish();
+        gameLoop.enemyManager.bulletManager.publish();
 
         if(gameLoop.playerManager.isShooting){
             if (!hasShot) {
@@ -20,7 +21,7 @@ var gameLoop = (function () {
             }
         }
 
-        gameLoop.enemyManager.publish(subscribers.bullet, subscribers.player);
+        gameLoop.enemyManager.publish(subscribers.playerBullets, subscribers.player);
         subscribers.infoBox.changeInfo(subscribers.player);
     }
 
