@@ -15,7 +15,7 @@ var Bullet = (function (orangeBullet, blueBullet, purpleBullet, parent) {
             case BULLET_TYPE.BLUE_BULLET:
                 blueBullet.call(this, possLeft, possTop);
                 break;
-            case BULLET_TYPE.PURPLE_BULLET:
+            case BULLET_TYPE.RED_BULLET:
                 purpleBullet.call(this, possLeft, possTop);
                 break;
             default:
@@ -40,4 +40,4 @@ var Bullet = (function (orangeBullet, blueBullet, purpleBullet, parent) {
     };
 
     return Bullet;
-})(BulletOrangeBuilder, BulletBlueBuilder, BulletPurpleBuilder, WorldObject);
+})(BulletOrangeBuilder, BulletBlueBuilder, BulletRedBuilder, WorldObject);

@@ -1,15 +1,15 @@
-var BulletPurpleBuilder = (function (parent) {
+var BulletRedBuilder = (function (parent) {
     'use strict';
 
-    BulletPurpleBuilder.prototype = Object.create(parent.prototype);
+    BulletRedBuilder.prototype = Object.create(parent.prototype);
 
-    var BULLET_WIDTH = 20,
-        BULLET_HEIGHT = 20,
+    var BULLET_WIDTH = 18,
+        BULLET_HEIGHT = 18,
         BULLET_SPEED = 7,
         BULLET_DAMAGE = 15,
-        BULLET_IMAGE = "url('img/bulletPurple.png') no-repeat";
+        BULLET_IMAGE = "url('img/bulletRed.png') no-repeat";
 
-    function BulletPurpleBuilder(possLeft, possTop) {
+    function BulletRedBuilder(possLeft, possTop) {
         parent.call(this);
 
         this.positionLeft = possLeft;
@@ -21,6 +21,6 @@ var BulletPurpleBuilder = (function (parent) {
         this.bulletDamage = BULLET_DAMAGE;
     }
 
-    return BulletPurpleBuilder;
+    return BulletRedBuilder;
 
 })(WorldObject);

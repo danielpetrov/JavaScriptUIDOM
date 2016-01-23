@@ -22,10 +22,10 @@ var EnemyManager = (function (parent) {
         }
 
         if((Math.random() * 100) < percentage){
-            this.bulletManager.spawn(new Bullet(enemy.positionLeft, ( enemy.positionTop + (enemy.planeWidth / 4) ), BULLET_TYPE.PURPLE_BULLET, true));
+            this.bulletManager.spawn(new Bullet(enemy.positionLeft, ( enemy.positionTop + (enemy.planeWidth / 4) ), BULLET_TYPE.RED_BULLET, true));
         }
         if((Math.random() * 100) < percentage){
-            this.bulletManager.spawn(new Bullet(enemy.positionLeft, ( enemy.positionTop + (enemy.planeWidth / 2) ), BULLET_TYPE.PURPLE_BULLET, true));
+            this.bulletManager.spawn(new Bullet(enemy.positionLeft, ( enemy.positionTop + (enemy.planeWidth / 2) ), BULLET_TYPE.RED_BULLET, true));
         }
     };
 

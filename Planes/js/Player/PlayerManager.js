@@ -62,22 +62,23 @@ var PlayerManager = (function (parent) {
     };
 
     PlayerManager.prototype.publish = function (bullets, enemies) {
-        this.onGameLoop(this.subscribers[0]);
+        var player = this.subscribers[0];
+        this.onGameLoop(player);
 
         //check if player is hitted by bullet
         for(var bullet in bullets) {
-            if ((bullets[bullet].positionTop > this.subscribers[0].positionTop)
-                && (bullets[bullet].positionTop < (this.subscribers[0].positionTop + this.subscribers[0].planeHeight))
-                && (bullets[bullet].positionLeft > this.subscribers[0].positionLeft)
-                && bullets[bullet].positionLeft < (this.subscribers[0].positionLeft + this.subscribers[0].planeWidth)) {
+            if ((bullets[bullet].positionTop > player.positionTop)
+                && (bullets[bullet].positionTop < (player.positionTop + this.subscribers[0].planeHeight))
+                && (bullets[bullet].positionLeft > player.positionLeft)
+                && bullets[bullet].positionLeft < (player.positionLeft + player.planeWidth)) {
 
                 //player takes damage
-                this.subscribers[0].addHealth( -bullets[bullet].bulletDamage );
+                player.addHealth( -bullets[bullet].bulletDamage );
 
                 document.body.removeChild(bullets[bullet].dom);
                 bullets.splice(bullet, 1);
 
-                if(this.subscribers[0].health <= 0){
+                if(player.health <= 0){
                     alert("GAME OVER!!!");
                     Game.pause();
                     break;
@@ -86,16 +87,33 @@ var PlayerManager = (function (parent) {
         }
 
         //if enemy and player ship collide
-        for (var enemy in enemies) {
-            if ((enemies[enemy].positionTop > this.subscribers[0].positionTop)
-                && (enemies[enemy].positionTop < (this.subscribers[0].positionTop + this.subscribers[0].planeHeight))
-                && (enemies[enemy].positionLeft > this.subscribers[0].positionLeft)
-                && enemies[enemy].positionLeft < (this.subscribers[0].positionLeft + this.subscribers[0].planeWidth)) {
+        for (var en in enemies) {
+            var enemy = enemies[en],
+                enemyBottom = enemy.positionTop + enemy.planeWidth,
+                enemyRight = enemy.positionLeft + enemy.planeHeight,
+                enemyVerticalCenter = enemy.positionTop + ( enemy.planeWidth / 2 ),
+                enemyHorizontalCenter = enemy.positionLeft + ( enemy.planeHeight / 2);//couse rotated
+            //tuff algo o.O checks if enemy top colide, then enemy bottom, then enemy center. Either one doesnt work alone.
+            // Probably bugs but I think 3 points from enemy is enought.
+            if (
+                ( player.positionTop < enemyBottom ) &&
+                ( enemyBottom < (player.positionTop + player.planeWidth) ) &&
+                ( player.positionLeft < enemyRight ) &&
+                ( enemyRight < ( player.positionLeft + player.planeHeight ) ) ||
+                ( player.positionTop < enemy.positionTop ) &&
+                ( enemy.positionTop < (player.positionTop + player.planeWidth) ) &&
+                ( player.positionLeft < enemy.positionLeft ) &&
+                ( enemy.positionLeft < ( player.positionLeft + player.planeHeight ) ) ||
+                ( player.positionTop < enemyVerticalCenter ) &&
+                ( enemyVerticalCenter < (player.positionTop + player.planeWidth) ) &&
+                ( player.positionLeft < enemyHorizontalCenter ) &&
+                ( enemyHorizontalCenter < ( player.positionLeft + player.planeHeight ) )
+            ){
 
-                this.subscribers[0].addHealth( -enemies[enemy].damageToBase );
+                player.addHealth( -enemy.damageToBase );
 
-                document.body.removeChild(enemies[enemy].dom);
-                enemies.splice(enemy, 1);
+                document.body.removeChild(enemy.dom);
+                enemies.splice(en, 1);
 
                 if (this.subscribers[0].health <= 0) {
                     alert("GAME OVER!!!");
